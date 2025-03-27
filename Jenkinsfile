@@ -34,7 +34,7 @@ pipeline {
             }
         } 
 
-        stage('Build My Docker Image'){
+        stage('Build and Push Docker Image'){
             agent {
                 docker {
                     image 'amazon/aws-cli'
@@ -46,6 +46,19 @@ pipeline {
                 sh '''
                     amazon-linux-extras install docker
                     docker build -t my-docker-image .
+                    withCredentials([
+                    usernamePassword(
+                    credentialsId: 'Group-Project-CE', 
+                    passwordVariable: 'AWS_SECRET_ACCESS_KEY', 
+                    usernameVariable: 'AWS_ACCESS_KEY_ID')
+                    ]) {
+                        sh '''
+                            aws --version
+                            
+
+                        
+                        '''
+                    }
                 '''
             }
         }  
