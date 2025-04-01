@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        AWS_DEFAULT_REGION = 'eu-north-2'
+        AWS_DEFAULT_REGION = 'us-east-2'
         AWS_DOCKER_REGISTRY = '608232564950.dkr.ecr.us-east-2.amazonaws.com'
         // your ECR repository name
         APP_NAME = 'group-project-ce'
