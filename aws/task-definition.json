@@ -5,8 +5,8 @@
     "family": "Group-Project-CE-Prod",
     "containerDefinitions": [
         {
-            "name": "TeampApp",
-            "image": "608232564950.dkr.ecr.us-east-2.amazonaws.com/group-project-ce",
+            "name": "GroupApp",
+            "image": "701518155081.dkr.ecr.eu-north-1.amazonaws.com/imagefinalproject_ec:latest",
             "portMappings": [
                 {
                     "name": "ngnix-80-tcp",
@@ -23,5 +23,5 @@
     "networkMode": "awsvpc",
     "memory": "512",
     "cpu": "256",
-    "executionRoleArn": "arn:aws:iam::608232564950:role/ecsTaskExecutionRole"
+    "executionRoleArn": "arn:aws:iam::701518155081:role/ecsTaskExecutionRole"
 }
