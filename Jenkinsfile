@@ -62,27 +62,27 @@ pipeline {
             }
         } 
 
-        // stage('Deploy to AWS') {
-        //      agent {
-        //          docker {
-        //              image 'amazon/aws-cli'
-        //              reuseNode true
-        //              args '-u root --entrypoint=""'
-        //          }
-        //     }
+        stage('Deploy to AWS') {
+             agent {
+                 docker {
+                     image 'amazon/aws-cli'
+                     reuseNode true
+                     args '-u root --entrypoint=""'
+                 }
+            }
            
-        //      steps {
-        //         withCredentials([usernamePassword(credentialsId: 'finalprojectNewUserKey', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')])
-        //         {  
-        //              sh '''
-        //                  aws --version
-        //                 yum install jq -y
+             steps {
+                withCredentials([usernamePassword(credentialsId: 'Group-Project-CE', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')])
+                {  
+                     sh '''
+                         aws --version
+                        yum install jq -y
                        
-        //                  LATEST_TD_REVISION=$(aws ecs register-task-definition --cli-input-json file://aws/task-definition.json | jq '.taskDefinition.revision')
-        //                  aws ecs update-service --cluster my-group-project-ce --service my-group-project-ce-service --task-definition Group-Project-CE-Prod:$LATEST_TD_REVISION
-        //              '''
-        //          }
-        //      }
-        //  }
+                         LATEST_TD_REVISION=$(aws ecs register-task-definition --cli-input-json file://aws/task-definition.json | jq '.taskDefinition.revision')
+                         aws ecs update-service --cluster my-group-project-ce --service my-group-project-ce-service --task-definition Group-Project-CE-Prod:$LATEST_TD_REVISION
+                     '''
+                 }
+             }
+         }
     }
 }
